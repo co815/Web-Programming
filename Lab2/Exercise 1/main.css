@@ -1,0 +1,87 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #87CEEB;
+}
+
+.sky {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+    z-index: -1;
+}
+
+.floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+    background: #2c3e50;
+    border-top: 5px solid #34495e;
+}
+
+.ball-wrapper {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: -60px;
+    margin-top: -60px;
+    animation:
+        moveX 5s linear infinite,
+        moveY 1.25s infinite;
+}
+
+.ball {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg,
+            #e74c3c 0deg 45deg,
+            #f1c40f 45deg 90deg,
+            #3498db 90deg 135deg,
+            #2ecc71 135deg 180deg);
+    box-shadow:
+        inset -8px -8px 15px rgba(0, 0, 0, 0.4),
+        2px 5px 10px rgba(0, 0, 0, 0.3);
+    animation: rotateBall 5s linear infinite;
+}
+
+@keyframes moveX {
+    0% {
+        left: -60px;
+    }
+
+    100% {
+        left: 100vw;
+    }
+}
+
+@keyframes moveY {
+    0% {
+        top: 80vh;
+        animation-timing-function: ease-out;
+    }
+
+    50% {
+        top: 30vh;
+        animation-timing-function: ease-in;
+    }
+
+    100% {
+        top: 80vh;
+    }
+}
+
+@keyframes rotateBall {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
+}

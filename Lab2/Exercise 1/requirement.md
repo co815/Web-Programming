@@ -1,0 +1,1 @@
+Create an animation where a ball rolls along a curved path, like a rollercoaster, from one side of the screen to the other. The ball should follow a smooth, continuous arc, and rotate as if it's actually rolling. Use @keyframes for the path animation and transform for the rotation effect.
