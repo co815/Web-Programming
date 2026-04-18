@@ -1,0 +1,1 @@
+Write a JavaScript which removes all the `<a>` tags from a document if their href attribute begins with "http://www.scs.ubbcluj.ro".
