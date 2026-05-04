@@ -1,52 +1,32 @@
-(function (root, factory) {
-  if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
-  } else {
-    root.GameCore = factory();
-  }
-}(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  function randomInt(min, max, rng) {
-    const random = rng || Math.random;
-    return Math.floor(random() * (max - min + 1)) + min;
-  }
+const GameCore = {
+  randomInt: function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
 
-  function clampSpawnPosition(viewW, viewH, moleW, moleH, rng) {
+  clampSpawnPosition: function(viewW, viewH, moleW, moleH) {
     const maxLeft = Math.max(0, viewW - moleW);
     const maxTop = Math.max(0, viewH - moleH);
     return {
-      left: randomInt(0, maxLeft, rng),
-      top: randomInt(0, maxTop, rng)
+      left: this.randomInt(0, maxLeft),
+      top: this.randomInt(0, maxTop)
     };
-  }
+  },
 
-  function shouldCountHit(isRunning, currentMoleId, clickedMoleId) {
-    return isRunning === true
-      && Number.isInteger(currentMoleId)
-      && Number.isInteger(clickedMoleId)
-      && Number.isFinite(currentMoleId)
-      && Number.isFinite(clickedMoleId)
-      && currentMoleId === clickedMoleId;
-  }
+  shouldCountHit: function(isRunning, currentMoleId, clickedMoleId) {
+    return isRunning === true && currentMoleId === clickedMoleId;
+  },
 
-  function nextScore(currentScore, targetScore) {
+  nextScore: function(currentScore, targetScore) {
     const score = Number(currentScore) + 1;
     return { score, won: score === Number(targetScore) };
-  }
+  },
 
-  function resolveHit(payload) {
-    const valid = shouldCountHit(payload.isRunning, payload.currentMoleId, payload.clickedMoleId);
+  resolveHit: function(payload) {
+    const valid = this.shouldCountHit(payload.isRunning, payload.currentMoleId, payload.clickedMoleId);
     if (!valid) {
       return { counted: false, score: Number(payload.score), won: false };
     }
-    const progressed = nextScore(payload.score, payload.targetScore);
+    const progressed = this.nextScore(payload.score, payload.targetScore);
     return { counted: true, score: progressed.score, won: progressed.won };
   }
-
-  return {
-    randomInt,
-    clampSpawnPosition,
-    shouldCountHit,
-    nextScore,
-    resolveHit
-  };
-}));
+};

@@ -1,8 +1,8 @@
-(function ($, Core) {
+$(document).ready(function() {
   const TARGET_SCORE = 10;
   const SPAWN_MIN_MS = 400;
   const SPAWN_MAX_MS = 1200;
-  const VISIBLE_MS = 7000;
+  const VISIBLE_MS = 1500;
 
   const $score = $('#score-value');
   const $status = $('#status-text');
@@ -44,7 +44,7 @@
 
   function scheduleSpawn() {
     if (!state.isRunning) return;
-    const delay = Core.randomInt(SPAWN_MIN_MS, SPAWN_MAX_MS, Math.random);
+    const delay = GameCore.randomInt(SPAWN_MIN_MS, SPAWN_MAX_MS);
     state.spawnTimer = setTimeout(spawnMole, delay);
   }
 
@@ -52,12 +52,11 @@
     if (!state.isRunning) return;
     state.currentMoleId += 1;
 
-    const pos = Core.clampSpawnPosition(
+    const pos = GameCore.clampSpawnPosition(
       $gameArea.innerWidth(),
       $gameArea.innerHeight(),
       $activeTarget.outerWidth(),
-      $activeTarget.outerHeight(),
-      Math.random
+      $activeTarget.outerHeight()
     );
 
     $activeTarget
@@ -73,7 +72,8 @@
 
   function onClick() {
     const clickedId = Number($(this).attr('data-mole-id'));
-    const result = Core.resolveHit({
+
+    const result = GameCore.resolveHit({
       isRunning: state.isRunning,
       currentMoleId: state.currentMoleId,
       clickedMoleId: clickedId,
@@ -105,4 +105,4 @@
 
   renderScore();
   scheduleSpawn();
-}(jQuery, window.GameCore));
+});
