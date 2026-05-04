@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Mole</title>
+  <circle cx="32" cy="36" r="20" fill="#6b4f3a" />
+  <circle cx="24" cy="32" r="3" fill="#111" />
+  <circle cx="40" cy="32" r="3" fill="#111" />
+  <ellipse cx="32" cy="44" rx="7" ry="4" fill="#d9b08c" />
+</svg>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 4 - Whack a Mole</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header class="game-header">
+    <h1>Whack-a-Mole</h1>
+    <p>Score: <span id="score-value">0</span></p>
+    <p id="status-text">Ready</p>
+  </header>
+
+  <main>
+    <section id="game-area" aria-label="Game Area">
+      <img
+        id="mole"
+        class="mole hidden"
+        src="images/mole.svg"
+        alt="Mole"
+      >
+      <!-- fallback target -->
+      <button id="mole-fallback" class="mole hidden" type="button" aria-label="Mole target">
+        Mole
+      </button>
+    </section>
+  </main>
+
+  <script src="jquery.min.js"></script>
+  <script src="game-core.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
