@@ -13,3 +13,5 @@ desktop.ini
 
 # Local git worktrees
 .worktrees/
+
+.env
