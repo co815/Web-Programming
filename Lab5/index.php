@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($username !== '' && $password !== '') {
-        $pdo  = get_db();
+        $pdo = get_db();
         $stmt = $pdo->prepare('SELECT id, password_hash, role FROM users WHERE username = ?');
         $stmt->execute([$username]);
         $user = $stmt->fetch();
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password_hash'])) {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role']    = $user['role'];
+            $_SESSION['role'] = $user['role'];
             $dest = $user['role'] === 'professor' ? 'dashboard_professor.php' : 'dashboard_student.php';
             header('Location: ' . $dest);
             exit;

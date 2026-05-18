@@ -35,15 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Passwords do not match.';
 
     if (empty($errors)) {
-        $pdo  = get_db();
+        $pdo = get_db();
         $stmt = $pdo->prepare('SELECT id FROM users WHERE username = ?');
         $stmt->execute([$username]);
         if ($stmt->fetch()) {
             $errors[] = 'Username already taken.';
         } else {
             $hash = password_hash($password, PASSWORD_BCRYPT);
-            $grp  = $role === 'student' ? $group_name : null;
-            $ins  = $pdo->prepare(
+            $grp = $role === 'student' ? $group_name : null;
+            $ins = $pdo->prepare(
                 'INSERT INTO users (username, password_hash, role, full_name, group_name) VALUES (?,?,?,?,?)'
             );
             $ins->execute([$username, $hash, $role, $full_name, $grp]);

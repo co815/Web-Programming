@@ -154,7 +154,7 @@ $initPage  = max(1, (int)($_GET['page'] ?? 1));
     function loadStudents(group, page) {
         if (!group) { return; }
         currentGroup = group;
-        currentPage  = page;
+        currentPage = page;
         var url = 'ajax/get_students.php?group=' + encodeURIComponent(group)
                 + '&course_id=' + COURSE_ID + '&page=' + page;
         fetch(url)
