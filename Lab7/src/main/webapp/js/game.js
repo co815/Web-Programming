@@ -1,6 +1,6 @@
 let pollInterval = null;
 let currentState = null;
-let gameOver = false;
+let gameOver= false;
 
 function startPolling() {
     fetchState();

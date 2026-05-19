@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    String errorMsg      = (String) request.getAttribute("error");
+    String usernameValue = (String) request.getAttribute("usernameValue");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +15,15 @@
     <h1>X-0 Game</h1>
     <h2>Register</h2>
 
-    <% if (request.getAttribute("error") != null) { %>
-        <p class="error"><%= request.getAttribute("error") %></p>
+    <% if (errorMsg != null) { %>
+        <p class="error"><%= errorMsg %></p>
     <% } %>
 
     <form method="post" action="${pageContext.request.contextPath}/register">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username"
-                   value="<%= request.getAttribute("usernameValue") != null ? request.getAttribute("usernameValue") : "" %>"
+                   value="<%= usernameValue != null ? usernameValue : "" %>"
                    minlength="3" maxlength="50" pattern="[a-zA-Z0-9_]+" autofocus required>
             <small>3–50 characters. Letters, digits, underscores only.</small>
         </div>

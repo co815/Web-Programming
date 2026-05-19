@@ -23,7 +23,6 @@ body {
 h1 { font-size: 2rem; }
 h2 { font-size: 1.4rem; margin-bottom: 20px; }
 
-/* Header row */
 .header {
     display: flex;
     align-items: center;
@@ -33,7 +32,6 @@ h2 { font-size: 1.4rem; margin-bottom: 20px; }
 }
 .header h1 { flex: 1; }
 
-/* Forms */
 .form-group { margin-bottom: 18px; }
 .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
 .form-group input {
@@ -50,7 +48,6 @@ h2 { font-size: 1.4rem; margin-bottom: 20px; }
 }
 .form-group small { display: block; margin-top: 4px; color: #666; font-size: 0.82rem; }
 
-/* Buttons */
 button {
     padding: 9px 22px;
     border: none;
@@ -65,11 +62,9 @@ button:hover { background: #357abd; }
 .btn-secondary { background: #e0e0e0; color: #333; }
 .btn-secondary:hover { background: #c8c8c8; }
 
-/* Feedback messages */
 .error  { color: #c62828; margin-bottom: 14px; }
 .success { color: #2e7d32; margin-bottom: 14px; }
 
-/* Lobby */
 .lobby-card {
     padding: 20px;
     background: #f9f9f9;
@@ -79,7 +74,6 @@ button:hover { background: #357abd; }
 .lobby-card p { margin-bottom: 12px; }
 .error-card { background: #fff3f3; border: 1px solid #ffcdd2; }
 
-/* Game: status bar */
 .status-bar {
     text-align: center;
     padding: 12px;
@@ -89,7 +83,6 @@ button:hover { background: #357abd; }
     margin-bottom: 20px;
 }
 
-/* Game: board */
 .board {
     display: grid;
     grid-template-columns: repeat(3, 110px);
@@ -119,7 +112,6 @@ button:hover { background: #357abd; }
 .cell.clickable { cursor: pointer; }
 .cell.clickable:hover { background: #dce8f7; }
 
-/* Game: overlay */
 .overlay {
     position: fixed;
     inset: 0;

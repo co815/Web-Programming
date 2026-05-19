@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    String playerSymbol = (String) request.getAttribute("playerSymbol");
+    String currentUser  = (String) session.getAttribute("username");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +14,8 @@
 <div class="container">
     <div class="header">
         <h1>X-0</h1>
-        <span>You are <strong><%= request.getAttribute("playerSymbol") %></strong>
-              &mdash; <strong><%= session.getAttribute("username") %></strong></span>
+        <span>You are <strong><%= playerSymbol %></strong>
+              &mdash; <strong><%= currentUser %></strong></span>
         <form method="post" action="${pageContext.request.contextPath}/leave" id="leaveForm" style="margin:0">
             <button type="button" class="btn-secondary" onclick="confirmLeave()">Leave</button>
         </form>
@@ -36,8 +40,8 @@
 </div>
 
 <script>
-    const playerSymbol = '<%= request.getAttribute("playerSymbol") %>';
-    const myUsername   = '<%= session.getAttribute("username") %>';
+    const playerSymbol = '<%= playerSymbol %>';
+    const myUsername   = '<%= currentUser %>';
     const contextPath  = '${pageContext.request.contextPath}';
 </script>
 <script src="${pageContext.request.contextPath}/js/game.js"></script>

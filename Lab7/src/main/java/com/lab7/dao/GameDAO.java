@@ -32,7 +32,6 @@ public class GameDAO {
         return g;
     }
 
-    /** Returns the single non-finished game (waiting or active), or null. */
     public Game findActive() throws SQLException {
         String sql = SELECT + " WHERE g.status IN ('waiting','active') ORDER BY g.created_at DESC LIMIT 1";
         try (Connection conn = DBConnection.getConnection();

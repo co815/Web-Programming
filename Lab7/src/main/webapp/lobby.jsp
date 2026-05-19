@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.lab7.model.Game" %>
+<%@ page contentType="text/html;charset=UTF-8" import="com.lab7.model.Game" %>
+<%
+    String currentUser = (String) session.getAttribute("username");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
 <div class="container">
     <div class="header">
         <h1>X-0 Lobby</h1>
-        <span>Logged in as <strong><%= session.getAttribute("username") %></strong></span>
+        <span>Logged in as <strong><%= currentUser %></strong></span>
         <form method="post" action="${pageContext.request.contextPath}/logout" style="margin:0">
             <button type="submit" class="btn-secondary">Logout</button>
         </form>

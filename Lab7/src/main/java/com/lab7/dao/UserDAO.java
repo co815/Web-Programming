@@ -36,7 +36,6 @@ public class UserDAO {
         }
     }
 
-    /** Returns the User if credentials are valid, null otherwise. */
     public User authenticate(String username, String password) throws SQLException {
         User u = findByUsername(username);
         if (u != null && PasswordUtil.verify(password, u.getPasswordHash())) {
