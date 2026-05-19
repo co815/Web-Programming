@@ -15,3 +15,4 @@ desktop.ini
 .worktrees/
 
 .env
+/Lab7/target/
