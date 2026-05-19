@@ -52,10 +52,6 @@ public class GameDAO {
         }
     }
 
-    /**
-     * Creates a new game. Deletes any finished game rows first to keep the table clean.
-     * Returns the newly created Game.
-     */
     public Game createGame(int playerXId) throws SQLException {
         try (Connection conn = DBConnection.getConnection()) {
             try (PreparedStatement del = conn.prepareStatement("DELETE FROM game WHERE status = 'finished'")) {
@@ -74,10 +70,6 @@ public class GameDAO {
         }
     }
 
-    /**
-     * Sets player_o and flips status to active.
-     * Uses WHERE status='waiting' to prevent double-join race condition.
-     */
     public Game joinGame(int gameId, int playerOId) throws SQLException {
         String sql = "UPDATE game SET player_o_id = ?, status = 'active' WHERE id = ? AND status = 'waiting'";
         try (Connection conn = DBConnection.getConnection();
@@ -113,7 +105,6 @@ public class GameDAO {
         }
     }
 
-    /** Sets status=finished and assigns winner (used for forfeit). */
     public void forfeit(int gameId, int winnerId) throws SQLException {
         String sql = "UPDATE game SET status = 'finished', winner_id = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
