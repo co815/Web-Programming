@@ -5,21 +5,39 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
+
 @WebListener
 public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ServletContext ctx = sce.getServletContext();
-        String password = System.getenv("DB_PASSWORD");
-        if (password == null) password = ctx.getInitParameter("db.password");
-        DBConnection.init(
-            ctx.getInitParameter("db.url"),
-            ctx.getInitParameter("db.user"),
-            password
-        );
+        Properties env = loadDotEnv();
+        String url = get(env, "DB_URL");
+        String user = get(env, "DB_USER");
+        String password = get(env, "DB_PASSWORD");
+        DBConnection.init(url, user, password);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {}
+
+    private Properties loadDotEnv() {
+        Properties props = new Properties();
+        File envFile = new File(".env");
+        if (envFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(envFile)) {
+                props.load(fis);
+            } catch (Exception ignored) {}
+        }
+        return props;
+    }
+
+    private String get(Properties env, String key) {
+        String val = System.getenv(key);
+        if (val != null) return val;
+        return env.getProperty(key);
+    }
 }

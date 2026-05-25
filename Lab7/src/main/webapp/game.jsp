@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String playerSymbol = (String) request.getAttribute("playerSymbol");
-    String currentUser  = (String) session.getAttribute("username");
+    String currentUser = (String) session.getAttribute("username");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@
 
 <script>
     const playerSymbol = '<%= playerSymbol %>';
-    const myUsername   = '<%= currentUser %>';
-    const contextPath  = '${pageContext.request.contextPath}';
+    const myUsername = '<%= currentUser %>';
+    const contextPath = '${pageContext.request.contextPath}';
 </script>
 <script src="${pageContext.request.contextPath}/js/game.js"></script>
 </body>
