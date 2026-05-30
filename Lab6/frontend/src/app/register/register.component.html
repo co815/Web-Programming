@@ -1,0 +1,32 @@
+<div class="container form-page">
+  <form class="form-box" #f="ngForm" (ngSubmit)="f.valid && submit()">
+    <h2>Create Account</h2>
+    <p class="error" *ngFor="let e of errors">{{ e }}</p>
+    <label>Username
+      <input type="text" [(ngModel)]="username" name="username" required pattern="[a-zA-Z0-9_]{1,50}" autocomplete="username">
+    </label>
+    <label>Full Name
+      <input type="text" [(ngModel)]="full_name" name="full_name" required>
+    </label>
+    <label>Password
+      <input type="password" [(ngModel)]="password" name="password" required minlength="6" autocomplete="new-password">
+    </label>
+    <fieldset>
+      <legend>Role</legend>
+      <label><input type="radio" [(ngModel)]="role" name="role" value="professor" (change)="onRoleChange()"> Professor</label>
+      <label><input type="radio" [(ngModel)]="role" name="role" value="student" (change)="onRoleChange()"> Student</label>
+    </fieldset>
+    <div *ngIf="role === 'student'">
+      <label>Group
+        <select [(ngModel)]="group_name" name="group_name" [required]="role === 'student'">
+          <option value="">— select group —</option>
+          <option *ngFor="let g of groups" [value]="g">{{ g }}</option>
+        </select>
+      </label>
+    </div>
+    <button type="submit" class="btn" [disabled]="loading">
+      {{ loading ? 'Registering…' : 'Register' }}
+    </button>
+    <p class="form-link"><a routerLink="/login">Already have an account? Log in</a></p>
+  </form>
+</div>

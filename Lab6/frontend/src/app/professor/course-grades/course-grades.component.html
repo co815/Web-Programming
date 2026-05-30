@@ -1,0 +1,54 @@
+<div class="container">
+  <header class="page-header">
+    <h1>Manage Grades</h1>
+    <a routerLink="/professor" class="btn btn-secondary">← Back</a>
+  </header>
+
+  <p [class]="messageType" *ngIf="message">{{ message }}</p>
+
+  <section class="card">
+    <label for="group-select">Select Group:</label>
+    <select id="group-select" [(ngModel)]="selectedGroup" (change)="onGroupChange()">
+      <option value="">— choose group —</option>
+      <option *ngFor="let g of groups" [value]="g">{{ g }}</option>
+    </select>
+  </section>
+
+  <section class="card" *ngIf="studentsPage">
+    <div *ngIf="studentsPage.students.length === 0">
+      <p class="muted">No students in this group.</p>
+    </div>
+    <div *ngIf="studentsPage.students.length > 0">
+      <div class="student-card" *ngFor="let s of studentsPage.students" (click)="openModal(s)">
+        <span class="student-name">{{ s.full_name }}</span>
+        <span [class]="s.grade !== null ? 'student-grade' : 'no-grade'">
+          {{ s.grade !== null ? (+s.grade).toFixed(2) : '—' }}
+        </span>
+      </div>
+      <div class="pagination">
+        <button class="btn btn-small" *ngIf="page > 1" (click)="prevPage()">← Prev</button>
+        <span class="page-info">Page {{ page }} / {{ totalPages }} ({{ studentsPage.total }} students)</span>
+        <button class="btn btn-small" *ngIf="page < totalPages" (click)="nextPage()">Next →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal-overlay" *ngIf="modalOpen" (click)="closeModal()"></div>
+<div class="modal" *ngIf="modalOpen" role="dialog" aria-modal="true">
+  <button class="modal-close" (click)="closeModal()" title="Close">&#x2715;</button>
+  <h2>{{ modalStudent?.full_name }}</h2>
+  <form (ngSubmit)="saveGrade()">
+    <label>Grade (1–10)
+      <input type="number" [(ngModel)]="modalGrade" name="grade"
+             min="1" max="10" step="0.01" required>
+    </label>
+    <div class="modal-actions">
+      <button type="submit" class="btn" [disabled]="isSubmitting">Save</button>
+      <button type="button" class="btn btn-danger"
+              *ngIf="modalStudent?.grade !== null"
+              [disabled]="isSubmitting"
+              (click)="deleteGrade()">Delete Grade</button>
+    </div>
+  </form>
+</div>

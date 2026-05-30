@@ -1,0 +1,32 @@
+<div class="container">
+  <header class="page-header">
+    <h1>My Grades</h1>
+    <span class="muted">
+      {{ auth.currentUser?.full_name }} &nbsp;·&nbsp; Group {{ auth.currentUser?.group_name }}
+    </span>
+    <button class="btn btn-secondary" (click)="logout()">Log Out</button>
+  </header>
+
+  <div class="card" *ngIf="grades.length === 0">
+    <p class="muted">No grades assigned yet.</p>
+  </div>
+
+  <div class="card" style="padding:0; overflow:hidden;" *ngIf="grades.length > 0">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Professor</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of grades">
+          <td>{{ g.course_name }}</td>
+          <td>{{ g.professor_name }}</td>
+          <td class="grade-cell">{{ (+g.grade).toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="container form-page">
+  <form class="form-box" #f="ngForm" (ngSubmit)="f.valid && submit()">
+    <h1>Grades App</h1>
+    <h2>Log In</h2>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <label>Username
+      <input type="text" [(ngModel)]="username" name="username" required autofocus autocomplete="username">
+    </label>
+    <label>Password
+      <input type="password" [(ngModel)]="password" name="password" required autocomplete="current-password">
+    </label>
+    <button type="submit" class="btn" [disabled]="loading">
+      {{ loading ? 'Logging in…' : 'Log In' }}
+    </button>
+    <p class="form-link"><a routerLink="/register">No account? Register</a></p>
+  </form>
+</div>
